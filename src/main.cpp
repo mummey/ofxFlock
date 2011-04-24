@@ -3,9 +3,10 @@
 #include "ofAppGlutWindow.h"
 
 //========================================================================
-int main( ){
+int main( )
+{
 
-    ofAppGlutWindow window;
+  ofAppGlutWindow window;
 	ofSetupOpenGL(&window, 1024,768, OF_WINDOW);			// <-------- setup the GL context
 
 	// this kicks off the running of my app
