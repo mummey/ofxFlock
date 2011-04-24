@@ -1,16 +1,22 @@
 #ifndef _FLOCK_APP
 #define _FLOCK_APP
 
-
+// Includes
 #include "ofMain.h"
+
+// Forward declarations.
+class CBox;
 
 class flockApp : public ofBaseApp
 {
-
+  private:
+  CBox *box;
+  
 	public:
 		void setup();
 		void update();
 		void draw();
+    void exit();
 
 		void keyPressed  (int key);
 		void keyReleased(int key);

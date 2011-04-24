@@ -60,17 +60,18 @@ CBox::~CBox ()
 // rendering methods
 ////////////////////
 
-void CBox::Draw (void)
+void CBox::Draw (float x, float y)
 {
 
    ofPushMatrix();
 
+      glTranslatef(x,y,0);
       glColor3f(1.0f, 0.0f, 0.0f);
       glutWireCube (m_Height);
 
       // draw world XYZ axes?
 
-      if (gDrawAxes) {
+//      if (gDrawAxes) {
 
          glBegin(GL_LINES);
 
@@ -87,7 +88,7 @@ void CBox::Draw (void)
             glVertex3f(0.0f, 0.0f, 5.0f);
 
          glEnd();
-      }
+//      }
 
    ofPopMatrix();
 
