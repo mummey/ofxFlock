@@ -42,9 +42,11 @@ CBoid * CBoid::VisibleFriendsList[] = {NULL};
 // Constructor #1.
 // Creates an individual boid with randomized position and velocity.
 
-CBoid::CBoid (int id_v)
+CBoid::CBoid (int id_v, flockApp * w)
 {
 
+  wrldPtr = w;
+  
    m_id               = id_v;
    m_perception_range = DEFAULT_PERCEPTION_RANGE;
 
@@ -230,12 +232,12 @@ void CBoid::FlockIt (int flock_id, CBoid *first_boid)
       m_speed = MAX_SPEED;
 
    }
-
-   // Step 12:  Compute roll/pitch/yaw.
-   // Compute our orientation after all this speed adjustment nonsense.
-
-   ComputeRPY();
-
+//
+//   // Step 12:  Compute roll/pitch/yaw.
+//   // Compute our orientation after all this speed adjustment nonsense.
+//
+//   ComputeRPY();
+//
    // Step 13:  World boundaries.
    // If we've wandered outside the world bounds put us back in.  You might
    // not need to do this for your world, but that depends on your implementation.
@@ -403,7 +405,12 @@ int CBoid::SeeEnemies (int flock_id)
 
       // not our flock, so check it out
 
-      enemy = CFlock::ListOfFlocks[i]->GetFirstMember();
+     CFlock * flk = wrldPtr->FlockAtIndex(i);
+     
+     if(flk)
+       enemy = flk->GetFirstMember();
+     else
+       enemy = NULL;
 
       while (enemy != NULL) {
       

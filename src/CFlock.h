@@ -70,7 +70,7 @@ class CFlock
       // rendering functions
       //////////////////////
 
-      void Draw (void);
+      void Draw (float x, float y);
 
       //////////////////////////
       // miscellaneous functions

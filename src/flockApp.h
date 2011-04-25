@@ -4,13 +4,31 @@
 // Includes
 #include "ofMain.h"
 
+#define MAX_BOIDS                    30
+#define MAX_FLOCKS                    5
+
 // Forward declarations.
 class CBox;
+class CFlock;
+class CBoid;
 
 class flockApp : public ofBaseApp
 {
   private:
   CBox *box;
+  CFlock *Flocks[MAX_FLOCKS];
+  CBoid  *Boids[MAX_BOIDS];
+
+  public:
+  
+  CFlock *FlockAtIndex(int i)
+  {
+    if (i < 0 || i >= MAX_FLOCKS)
+      return NULL;
+  
+    return Flocks[i];
+  }
+  
   
 	public:
 		void setup();

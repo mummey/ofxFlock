@@ -12,6 +12,7 @@
 
 #include "CFlock.h" 
 #include "ofConstants.h"
+#include "ofGraphics.h"
 #include "ofxVectorMath.h"
 #include "ofAppGlutWindow.h"
 //#include "mtxlib.h"
@@ -31,8 +32,6 @@ extern bool gDrawSeparationDist;
 
 int CFlock::FlockCount = 0;
 
-//CFlock * CFlock::ListOfFlocks[] = {NULL};
-
 //
 // constructor and destructor methods
 //
@@ -50,8 +49,6 @@ CFlock::CFlock (void)
    m_num_members  = 0;
 
    m_first_member = NULL;
-
-   ListOfFlocks[FlockCount] = this;
 
    // increment counter
 
@@ -71,10 +68,6 @@ CFlock::~CFlock (void)
    m_id = m_num_members = 0;
 
    m_first_member = NULL;
-
-   // remove it from the list
-
-   ListOfFlocks[FlockCount] = NULL;
 
    // decrement counter
 
@@ -117,7 +110,7 @@ void CFlock::Update (void)
 // rendering functions
 //////////////////////
 
-void CFlock::Draw (void)
+void CFlock::Draw (float x, float y)
 {
 
    CBoid *ptr;
@@ -174,9 +167,10 @@ void CFlock::Draw (void)
 
       // push our world matrix down
 
-      glPushMatrix();
+      ofPushMatrix();
 
          // translate to where this boid is
+         glTranslatef(x, y, 0.0);
 
          glTranslatef(pos->x, pos->y, pos->z);
 
@@ -190,28 +184,28 @@ void CFlock::Draw (void)
 
          // draw perception distance spheres?
 
-         if (gDrawPerceptionDist) {
+         //if (gDrawPerceptionDist) {
             glColor3f (1.0f, 1.0f, 1.0f);
             glutWireSphere (DEFAULT_PERCEPTION_RANGE, 12, 12);
-         }
+         //}
 
          // draw keepaway distance spheres?
 
-         if (gDrawKeepawayDist) {
+         //if (gDrawKeepawayDist) {
             glColor3f (1.0f, 0.0f, 0.0f);
             glutWireSphere (KEEP_AWAY_DIST, 12, 12);
-         }
+         //}
 
          // draw separation distance spheres?
 
-         if (gDrawSeparationDist) {
+         //if (gDrawSeparationDist) {
             glColor3f (color_r, color_g, color_b);
             glutWireSphere (SEPARATION_DIST, 12, 12);
-         }
+        // }
 
          // draw local (boid space) XYZ axes?
 
-         if (gDrawAxes) {
+         //if (gDrawAxes) {
 
             glBegin(GL_LINES);
 
@@ -228,7 +222,7 @@ void CFlock::Draw (void)
                glVertex3f(0.0f, 0.0f, 2.0f);
 
             glEnd();
-         }
+         //}
 
          // set this boid's color
 
@@ -299,7 +293,7 @@ void CFlock::Draw (void)
 
          // Pop the rotation matrix from the MODELVIEW stack
 
-         glPopMatrix();
+         ofPopMatrix();
 
       // get next boid
 

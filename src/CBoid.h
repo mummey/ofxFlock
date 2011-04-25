@@ -14,19 +14,22 @@
 //
 
 #include "ofxVectorMath.h"
+#include "flockApp.h"
 //#include "defaults.h"
 //#include "mtxlib.h"
 //#include "util.h"
 //#include "vector.h"
 
-#define MAX_FRIENDS_VISIBLE 7
+#define MAX_FRIENDS_VISIBLE MAX_BOIDS/2
 
 //
 // class definition
 //
 
 class CBoid {
-
+  private:
+  flockApp *wrldPtr;
+  
    public:
 
       ///////////////////
@@ -45,7 +48,7 @@ class CBoid {
       // Creates an individual boid with randomized position, 
       // velocity, and orientation.
 
-      CBoid (int id_v);
+      CBoid (int id_v, flockApp * w);
 
       // Constructor #2.
       // Creates an individual boid with specific position, 
