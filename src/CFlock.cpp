@@ -185,22 +185,22 @@ void CFlock::Draw (float x, float y)
          // draw perception distance spheres?
 
          //if (gDrawPerceptionDist) {
-            glColor3f (1.0f, 1.0f, 1.0f);
-            glutWireSphere (DEFAULT_PERCEPTION_RANGE, 12, 12);
+//            glColor3f (1.0f, 1.0f, 1.0f);
+//            glutWireSphere (DEFAULT_PERCEPTION_RANGE, 12, 12);
          //}
 
          // draw keepaway distance spheres?
 
          //if (gDrawKeepawayDist) {
-            glColor3f (1.0f, 0.0f, 0.0f);
-            glutWireSphere (KEEP_AWAY_DIST, 12, 12);
+//            glColor3f (1.0f, 0.0f, 0.0f);
+//            glutWireSphere (KEEP_AWAY_DIST, 12, 12);
          //}
 
          // draw separation distance spheres?
 
          //if (gDrawSeparationDist) {
-            glColor3f (color_r, color_g, color_b);
-            glutWireSphere (SEPARATION_DIST, 12, 12);
+//            glColor3f (color_r, color_g, color_b);
+//            glutWireSphere (SEPARATION_DIST, 12, 12);
         // }
 
          // draw local (boid space) XYZ axes?
@@ -234,26 +234,26 @@ void CFlock::Draw (float x, float y)
 
             // back upper right
 
-            glVertex3f( 0.0,  0.25, 0.0);
-            glVertex3f(-0.25, 0.0,  0.0);
+            glVertex3f( 0.0,  2.5, 0.0);
+            glVertex3f(-2.5, 0.0,  0.0);
             glVertex3f( 0.0,  0.0,  0.0);
 
             // back lower right
 
-            glVertex3f( 0.0, -0.25, 0.0);
-            glVertex3f(-0.25, 0.0,  0.0);
+            glVertex3f( 0.0, -2.5, 0.0);
+            glVertex3f(-2.5, 0.0,  0.0);
             glVertex3f( 0.0,  0.0,  0.0);
 
             // back upper left
 
-            glVertex3f(0.0,  0.25, 0.0);
-            glVertex3f(0.25, 0.0,  0.0);
+            glVertex3f(0.0,  2.5, 0.0);
+            glVertex3f(2.5, 0.0,  0.0);
             glVertex3f(0.0,  0.0,  0.0);
 
             // back lower left
 
-            glVertex3f(0.0, -0.25, 0.0);
-            glVertex3f(0.25, 0.0,  0.0);
+            glVertex3f(0.0, -2.5, 0.0);
+            glVertex3f(2.5, 0.0,  0.0);
             glVertex3f(0.0,  0.0,  0.0);
 
             // make tops slightly darker
@@ -262,15 +262,15 @@ void CFlock::Draw (float x, float y)
 
             // top left side
 
-            glVertex3f(0.0,  0.25, 0.0);
-            glVertex3f(0.0,  0.0,  1.0);
-            glVertex3f(0.25, 0.0,  0.0);
+            glVertex3f(0.0,  2.5, 0.0);
+            glVertex3f(0.0,  0.0,  10.0);
+            glVertex3f(2.5, 0.0,  0.0);
 
             // top right side
 
-            glVertex3f( 0.0,  0.25, 0.0);
-            glVertex3f( 0.0,  0.0,  1.0);
-            glVertex3f(-0.25, 0.0,  0.0);
+            glVertex3f( 0.0,  2.5, 0.0);
+            glVertex3f( 0.0,  0.0,  10.0);
+            glVertex3f(-2.5, 0.0,  0.0);
 
             // make bottoms slightly lighter
 
@@ -278,15 +278,15 @@ void CFlock::Draw (float x, float y)
 
             // bottom left side
 
-            glVertex3f(0.0, -.25, 0.0);
-            glVertex3f(0.0,  0.0, 1.0);
-            glVertex3f(0.25, 0.0, 0.0);
+            glVertex3f(0.0, -2.5, 0.0);
+            glVertex3f(0.0,  0.0, 10.0);
+            glVertex3f(2.5, 0.0, 0.0);
 
             // bottom right side
 
-            glVertex3f( 0.0, -0.25, 0.0);
-            glVertex3f( 0.0,  0.0,  1.0);
-            glVertex3f(-0.25, 0.0,  0.0);
+            glVertex3f( 0.0, -2.5, 0.0);
+            glVertex3f( 0.0,  0.0,  10.0);
+            glVertex3f(-2.5, 0.0,  0.0);
 
 
          glEnd();

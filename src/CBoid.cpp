@@ -107,7 +107,8 @@ CBoid::CBoid (int id_v,
    m_pos = *pos_v;
    m_vel = *vel_v;
    m_ang = *ang_v;
-
+   m_oldvel = *vel_v;
+  
    m_speed = vel_v->length();
 
    m_num_flockmates_seen       = 0;
@@ -232,12 +233,12 @@ void CBoid::FlockIt (int flock_id, CBoid *first_boid)
       m_speed = MAX_SPEED;
 
    }
-//
-//   // Step 12:  Compute roll/pitch/yaw.
-//   // Compute our orientation after all this speed adjustment nonsense.
-//
-//   ComputeRPY();
-//
+
+   // Step 12:  Compute roll/pitch/yaw.
+   // Compute our orientation after all this speed adjustment nonsense.
+
+   ComputeRPY();
+
    // Step 13:  World boundaries.
    // If we've wandered outside the world bounds put us back in.  You might
    // not need to do this for your world, but that depends on your implementation.
@@ -575,10 +576,6 @@ float CBoid::AccumulateChanges (ofxVec3f &accumulator,
 
    accumulator += changes;
 
-   //accumulator.x += changes.x;
-   //accumulator.y += changes.y;
-   //accumulator.z += changes.z;
-
    return (accumulator.length());
 
 }
@@ -679,27 +676,27 @@ float CBoid::CanISee (CBoid *ptr)
 void CBoid::ComputeRPY (void)
 {
 
-   float  roll, pitch, yaw;
+   float roll, pitch, yaw;
 
-   // Determine the direction of the lateral acceleration.
-
-   ofxVec3f lateralDir = (m_vel.cross(m_vel - m_oldvel)).cross(m_vel);
-
-   lateralDir.normalize();
-
-   // Set the lateral acceleration's magnitude. The magnitude is the vector
-   // projection of the appliedAcceleration vector onto the direction of the
-   // lateral acceleration).
-  
-   float lateralMag = (m_vel - m_oldvel).dot(lateralDir);
-  
-   // compute roll
-
-   if (lateralMag == 0) {
+//   // Determine the direction of the lateral acceleration.
+//
+//   ofxVec3f lateralDir = (m_vel.cross(m_vel - m_oldvel)).cross(m_vel);
+//
+//   lateralDir.normalize();
+//
+//   // Set the lateral acceleration's magnitude. The magnitude is the vector
+//   // projection of the appliedAcceleration vector onto the direction of the
+//   // lateral acceleration).
+//  
+//   float lateralMag = (m_vel - m_oldvel).dot(lateralDir);
+//  
+//   // compute roll
+//
+//   if (lateralMag == 0) {
       roll = 0.0f;  
-   } else {
-      roll = (float) -atan2(GRAVITY, lateralMag) + HALF_PI;
-   }
+//   } else {
+//      roll = (float) -atan2(GRAVITY, lateralMag) + HALF_PI;
+//   }
 
    // compute pitch
 
