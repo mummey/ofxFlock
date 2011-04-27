@@ -1,6 +1,10 @@
 #include "flockApp.h"
 #include "ofAppRunner.h"
 #include "ofGraphics.h"
+#include "ofConstants.h"
+
+#include "ofxVec3f.h"
+
 #include "CBox.h"
 #include "CBoid.h"
 #include "CFlock.h"
@@ -74,10 +78,15 @@ void flockApp::update()
 //--------------------------------------------------------------
 void flockApp::draw()
 {
+  float ang=0.0;
+  ofxVec3f axis;
+  wrld_rot.getRotate(ang, axis);
+  
   ofPushMatrix();
   
-    glTranslatef(ofGetWidth()/2,ofGetHeight()/2,0);
-
+    ofTranslate(ofGetWidth()/2,ofGetHeight()/2,0);
+    ofRotate(ofRadToDeg(ang), -axis.x, axis.y, -axis.z);
+  
     box->Draw();
     
     for (int i = 0; i < MAX_FLOCKS; i++) {
@@ -99,17 +108,29 @@ void flockApp::exit()
 void flockApp::keyPressed(int key)
 {
 
+  switch (key) 
+  {
+    case OF_KEY_ESC: 
+    exit();
+    break;
+    case OF_KEY_UP: 
+    wrld_rot = wrld_rot * ofxQuaternion(ofDegToRad(5.0), ofxVec3f(1.0, 0.0, 0.0));
+    break;
+    case OF_KEY_DOWN: 
+    wrld_rot = wrld_rot * ofxQuaternion(ofDegToRad(-5.0), ofxVec3f(1.0, 0.0, 0.0));
+    break;
+    case OF_KEY_LEFT: 
+    wrld_rot = wrld_rot * ofxQuaternion(ofDegToRad(5.0), ofxVec3f(0.0, 1.0, 0.0));
+    break;
+    case OF_KEY_RIGHT: 
+    wrld_rot = wrld_rot * ofxQuaternion(ofDegToRad(-5.0), ofxVec3f(0.0, 1.0, 0.0));
+    break;
+  }
 }
 
 //--------------------------------------------------------------
 void flockApp::keyReleased(int key)
 {
-  switch (key) 
-  {
-    case 27: 
-    exit();
-    break;
-  }
 
 }
 

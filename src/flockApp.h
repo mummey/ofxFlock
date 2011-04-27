@@ -3,6 +3,7 @@
 
 // Includes
 #include "ofMain.h"
+#include "ofxQuaternion.h"
 
 #define MAX_BOIDS                    30
 #define MAX_FLOCKS                    5
@@ -19,6 +20,8 @@ class flockApp : public ofBaseApp
   CFlock *Flocks[MAX_FLOCKS];
   CBoid  *Boids[MAX_BOIDS];
 
+  ofxQuaternion wrld_rot;
+  
   public:
   
   CFlock *FlockAtIndex(int i)
