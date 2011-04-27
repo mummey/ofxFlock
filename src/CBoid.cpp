@@ -678,25 +678,25 @@ void CBoid::ComputeRPY (void)
 
    float roll, pitch, yaw;
 
-//   // Determine the direction of the lateral acceleration.
-//
-//   ofxVec3f lateralDir = (m_vel.cross(m_vel - m_oldvel)).cross(m_vel);
-//
-//   lateralDir.normalize();
-//
-//   // Set the lateral acceleration's magnitude. The magnitude is the vector
-//   // projection of the appliedAcceleration vector onto the direction of the
-//   // lateral acceleration).
-//  
-//   float lateralMag = (m_vel - m_oldvel).dot(lateralDir);
-//  
-//   // compute roll
-//
-//   if (lateralMag == 0) {
+   // Determine the direction of the lateral acceleration.
+
+   ofxVec3f lateralDir = (m_vel.crossed(m_vel - m_oldvel)).crossed(m_vel);
+
+   lateralDir.normalize();
+
+   // Set the lateral acceleration's magnitude. The magnitude is the vector
+   // projection of the appliedAcceleration vector onto the direction of the
+   // lateral acceleration).
+  
+   float lateralMag = (m_vel - m_oldvel).dot(lateralDir);
+  
+   // compute roll
+
+   if (lateralMag == 0) {
       roll = 0.0f;  
-//   } else {
-//      roll = (float) -atan2(GRAVITY, lateralMag) + HALF_PI;
-//   }
+   } else {
+      roll = (float) -atan2(GRAVITY, lateralMag) + HALF_PI;
+   }
 
    // compute pitch
 
