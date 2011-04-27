@@ -22,6 +22,8 @@ class flockApp : public ofBaseApp
 
   ofxQuaternion wrld_rot;
   
+  int mouseDownX, mouseDownY;
+  bool inMouseDrag;
   public:
   
   CFlock *FlockAtIndex(int i)
