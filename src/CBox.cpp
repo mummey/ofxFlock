@@ -60,12 +60,11 @@ CBox::~CBox ()
 // rendering methods
 ////////////////////
 
-void CBox::Draw (float x, float y)
+void CBox::Draw ()
 {
 
    ofPushMatrix();
 
-      glTranslatef(x,y,0);
       glColor3f(1.0f, 0.0f, 0.0f);
       glutWireCube (m_Height);
 

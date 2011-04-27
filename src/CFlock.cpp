@@ -110,7 +110,7 @@ void CFlock::Update (void)
 // rendering functions
 //////////////////////
 
-void CFlock::Draw (float x, float y)
+void CFlock::Draw ()
 {
 
    CBoid *ptr;
@@ -170,8 +170,6 @@ void CFlock::Draw (float x, float y)
       ofPushMatrix();
 
          // translate to where this boid is
-         glTranslatef(x, y, 0.0);
-
          glTranslatef(pos->x, pos->y, pos->z);
 
          // rotate to the boid's frame

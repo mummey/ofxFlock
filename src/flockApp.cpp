@@ -1,5 +1,6 @@
 #include "flockApp.h"
 #include "ofAppRunner.h"
+#include "ofGraphics.h"
 #include "CBox.h"
 #include "CBoid.h"
 #include "CFlock.h"
@@ -73,12 +74,17 @@ void flockApp::update()
 //--------------------------------------------------------------
 void flockApp::draw()
 {
-  box->Draw(ofGetWidth()/2,ofGetHeight()/2);
+  ofPushMatrix();
   
-  for (int i = 0; i < MAX_FLOCKS; i++) {
-    Flocks[i]->Draw(ofGetWidth()/2,ofGetHeight()/2);
-  }
+    glTranslatef(ofGetWidth()/2,ofGetHeight()/2,0);
 
+    box->Draw();
+    
+    for (int i = 0; i < MAX_FLOCKS; i++) {
+      Flocks[i]->Draw();
+    }
+
+  ofPopMatrix();
 }
 
 //--------------------------------------------------------------

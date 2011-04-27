@@ -37,7 +37,7 @@ public:
    // rendering methods
    ////////////////////
 
-   void Draw (float x, float y);
+   void Draw ();
 
    //////////////////////////
    // miscellaneous functions
