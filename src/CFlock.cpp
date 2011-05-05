@@ -15,7 +15,6 @@
 #include "ofGraphics.h"
 #include "ofxVectorMath.h"
 #include "ofAppGlutWindow.h"
-//#include "mtxlib.h"
 
 //
 // flocking debug globals
@@ -31,6 +30,32 @@ extern bool gDrawSeparationDist;
 //
 
 int CFlock::FlockCount = 0;
+const GLfloat CFlock::boidVert[] = {0.0, 0.0, 0.0,
+                                    -2.5, 0.0, 0.0,
+                                    2.5, 0.0, 0.0,
+                                    0.0, -2.5, 0.0,
+                                    0.0, 2.5, 0.0,
+                                    0.0, 0.0, 10.0};
+
+const GLubyte CFlock::boidIndices[] = {4,1,0,
+                                       3,1,0,
+                                       4,2,0,
+                                       3,2,0,
+                                       4,5,2,
+                                       4,5,1,
+                                       3,5,2,
+                                       3,5,1};
+
+const GLfloat CFlock::axes[] = {0.0, 0.0, 0.0,
+                                2.0, 0.0, 0.0,
+                                0.0, 2.0, 0.0,
+                                0.0, 0.0, 2.0};
+const GLfloat CFlock::axesColor[] = {1.0, 1.0, 1.0, 1.0,
+                                     1.0, 0.0, 0.0, 1.0,
+                                     0.0, 1.0, 0.0, 1.0,
+                                     0.0, 0.0, 1.0, 1.0};
+
+const GLubyte CFlock::axesIndices[] = {0,1,0,2,0,3};
 
 //
 // constructor and destructor methods
@@ -205,89 +230,47 @@ void CFlock::Draw ()
 
          //if (gDrawAxes) {
 
-            glBegin(GL_LINES);
-
-               glColor3f(1.0f, 0.0f, 0.0f);
-               glVertex3f(0.0f, 0.0f, 0.0f);
-               glVertex3f(2.0f, 0.0f, 0.0f);
-
-               glColor3f(0.0f, 1.0f, 0.0f); 
-               glVertex3f(0.0f, 0.0f, 0.0f);
-               glVertex3f(0.0f, 2.0f, 0.0f);
-
-               glColor3f(0.0f, 0.0f, 1.0f); 
-               glVertex3f(0.0f, 0.0f, 0.0f);
-               glVertex3f(0.0f, 0.0f, 2.0f);
-
-            glEnd();
+         
+         glEnableClientState(GL_VERTEX_ARRAY);
+         glEnableClientState(GL_COLOR_ARRAY);
+         
+           glVertexPointer(3, GL_FLOAT, 0, axes);
+           glColorPointer(4, GL_FLOAT, 0, axesColor);
+           
+           glDrawElements(GL_LINES, 6, GL_UNSIGNED_BYTE, axesIndices);
+         
+         glDisableClientState(GL_VERTEX_ARRAY);
+         glDisableClientState(GL_COLOR_ARRAY);
          //}
 
          // set this boid's color
 
-         glColor3f(color_r, color_g, color_b);
+         glColor4f(color_r, color_g, color_b, 1.0);
 
          // draw the boid
 
-         glBegin(GL_TRIANGLES);
-
-            // back upper right
-
-            glVertex3f( 0.0,  2.5, 0.0);
-            glVertex3f(-2.5, 0.0,  0.0);
-            glVertex3f( 0.0,  0.0,  0.0);
-
-            // back lower right
-
-            glVertex3f( 0.0, -2.5, 0.0);
-            glVertex3f(-2.5, 0.0,  0.0);
-            glVertex3f( 0.0,  0.0,  0.0);
-
-            // back upper left
-
-            glVertex3f(0.0,  2.5, 0.0);
-            glVertex3f(2.5, 0.0,  0.0);
-            glVertex3f(0.0,  0.0,  0.0);
-
-            // back lower left
-
-            glVertex3f(0.0, -2.5, 0.0);
-            glVertex3f(2.5, 0.0,  0.0);
-            glVertex3f(0.0,  0.0,  0.0);
+         glEnableClientState(GL_VERTEX_ARRAY);
+         glVertexPointer(3, GL_FLOAT, 0, boidVert);
+         glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_BYTE, boidIndices);
+         glDisableClientState(GL_VERTEX_ARRAY);
 
             // make tops slightly darker
 
-            glColor3f(color_r - 0.1f, color_g - 0.1f, color_b - 0.1f);
+         glColor4f(color_r - 0.1f, color_g - 0.1f, color_b - 0.1f, 1.0f);
 
-            // top left side
-
-            glVertex3f(0.0,  2.5, 0.0);
-            glVertex3f(0.0,  0.0,  10.0);
-            glVertex3f(2.5, 0.0,  0.0);
-
-            // top right side
-
-            glVertex3f( 0.0,  2.5, 0.0);
-            glVertex3f( 0.0,  0.0,  10.0);
-            glVertex3f(-2.5, 0.0,  0.0);
+         glEnableClientState(GL_VERTEX_ARRAY);
+         glVertexPointer(3, GL_FLOAT, 0, boidVert);
+         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, boidIndices+12);
+         glDisableClientState(GL_VERTEX_ARRAY);
 
             // make bottoms slightly lighter
 
-            glColor3f(color_r + 0.1f, color_g + 0.1f, color_b + 0.1f);
+         glColor4f(color_r + 0.1f, color_g + 0.1f, color_b + 0.1f, 1.0f);
 
-            // bottom left side
-
-            glVertex3f(0.0, -2.5, 0.0);
-            glVertex3f(0.0,  0.0, 10.0);
-            glVertex3f(2.5, 0.0, 0.0);
-
-            // bottom right side
-
-            glVertex3f( 0.0, -2.5, 0.0);
-            glVertex3f( 0.0,  0.0,  10.0);
-            glVertex3f(-2.5, 0.0,  0.0);
-
-
-         glEnd();
+         glEnableClientState(GL_VERTEX_ARRAY);
+         glVertexPointer(3, GL_FLOAT, 0, boidVert);
+         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, boidIndices+18);
+         glDisableClientState(GL_VERTEX_ARRAY);
 
          // Pop the rotation matrix from the MODELVIEW stack
 

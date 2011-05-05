@@ -8,6 +8,8 @@
 #ifndef _CBOX_H
 #define _CBOX_H
 
+#include "ofxVectorMath.h"
+
 class CBox  
 {
 
@@ -19,6 +21,11 @@ public:
 
    static CBox * WorldPtr;
 
+   static const GLfloat axes[];
+   static const GLfloat axesColor[];
+   static const GLubyte indices[];
+  
+   static const GLubyte boxIndices[];
    ///////////////////////////////
    // constructors and destructors
    ///////////////////////////////
@@ -64,6 +71,8 @@ private:
    float m_Width;
    float m_Height;
 
+  float boxVerts[24];
+    
 };
 
 #endif

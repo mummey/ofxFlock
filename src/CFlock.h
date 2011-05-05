@@ -43,7 +43,14 @@ class CFlock
       // list of flocks
 
       static CFlock * ListOfFlocks[MAX_FLOCKS];
+  
+      static const GLfloat boidVert[];
+      static const GLubyte boidIndices[];
 
+      static const GLfloat axes[];
+      static const GLfloat axesColor[];
+      static const GLubyte axesIndices[];
+  
       ///////////////////////////////
       // constructors and destructors
       ///////////////////////////////
