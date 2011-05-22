@@ -17,20 +17,12 @@
 #include "ofAppGlutWindow.h"
 
 //
-// flocking debug globals
-//
-
-extern bool gDrawAxes;
-extern bool gDrawPerceptionDist;
-extern bool gDrawKeepawayDist;
-extern bool gDrawSeparationDist;
-
-//
 // static variable initialization
 //
 
 int CFlock::FlockCount = 0;
-CFlock * CFlock::ListOfFlocks[] = {NULL};
+
+std::vector<CFlock*> CFlock::ListOfFlocks = std::vector<CFlock*>();
 
 const GLfloat CFlock::boidVert[] = {0.0, 0.0, 0.0,
                                     -2.5, 0.0, 0.0,
@@ -78,7 +70,7 @@ CFlock::CFlock (int boidCount)
    m_first_member = NULL;
 
    // increment counter
-   ListOfFlocks[FlockCount] = this;
+   ListOfFlocks . push_back(this);
   
    FlockCount++;
 

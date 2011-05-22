@@ -13,6 +13,8 @@
 // includes
 //
 
+#include <vector>
+
 #include "CBoid.h"
 
 #define MAX_FLOCKS 5
@@ -39,7 +41,7 @@ class CFlock
 
       // list of flocks
 
-      static CFlock * ListOfFlocks[MAX_FLOCKS];
+      static std::vector<CFlock*> ListOfFlocks;
   
       static const GLfloat boidVert[];
       static const GLubyte boidIndices[];
@@ -92,7 +94,7 @@ class CFlock
 
       // GetFirstMember.
       // Returns a pointer to the first boid 
-	  // in a given flock (if any).
+	    // in a given flock (if any).
 
       CBoid * GetFirstMember (void);
 
@@ -104,9 +106,7 @@ class CFlock
    private:
 
       int     m_id;                    // id of this flock
-
       int     m_num_members;           // number of boids in this flock
-
       CBoid   *m_first_member;         // pointer to first member
 
 };
