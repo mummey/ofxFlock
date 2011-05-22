@@ -66,7 +66,7 @@ const GLubyte CFlock::axesIndices[] = {0,1,0,2,0,3};
 // Constructor.
 // Creates a new flock.
 
-CFlock::CFlock (void)
+CFlock::CFlock (int boidCount)
 {
 
    // initialize internals
@@ -82,6 +82,9 @@ CFlock::CFlock (void)
   
    FlockCount++;
 
+  for(int i=0; i<boidCount; i++)
+    AddTo(new CBoid(i));
+  
    return;
 
 }

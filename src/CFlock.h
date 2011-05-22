@@ -55,7 +55,7 @@ class CFlock
       // Constructor.
       // Creates a new flock.
 
-      CFlock (void);
+      CFlock (int boidCount = 0);
 
       // Destructor.
 
