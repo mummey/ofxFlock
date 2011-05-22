@@ -13,9 +13,6 @@
 // includes
 //
 
-//#include "defaults.h"
-//#include "util.h"
-
 #include "CBoid.h"
 
 #define MAX_FLOCKS 5

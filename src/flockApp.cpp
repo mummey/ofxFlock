@@ -16,7 +16,7 @@ void flockApp::setup()
   
   for (int i = 0; i < MAX_BOIDS; i++) 
   {
-    Boids[i] = new CBoid(i, this);
+    Boids[i] = new CBoid(i);
   }
   
   // build some flocks for the boids to belong to

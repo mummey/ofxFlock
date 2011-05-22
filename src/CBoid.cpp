@@ -42,11 +42,9 @@ CBoid * CBoid::VisibleFriendsList[] = {NULL};
 // Constructor #1.
 // Creates an individual boid with randomized position and velocity.
 
-CBoid::CBoid (int id_v, flockApp * w)
+CBoid::CBoid (int id_v)
 {
 
-  wrldPtr = w;
-  
    m_id               = id_v;
    m_perception_range = DEFAULT_PERCEPTION_RANGE;
 
@@ -406,7 +404,7 @@ int CBoid::SeeEnemies (int flock_id)
 
       // not our flock, so check it out
 
-     CFlock * flk = wrldPtr->FlockAtIndex(i);
+     CFlock * flk = CFlock::ListOfFlocks[i];
      
      if(flk)
        enemy = flk->GetFirstMember();

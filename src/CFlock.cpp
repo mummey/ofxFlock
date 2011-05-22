@@ -30,6 +30,8 @@ extern bool gDrawSeparationDist;
 //
 
 int CFlock::FlockCount = 0;
+CFlock * CFlock::ListOfFlocks[] = {NULL};
+
 const GLfloat CFlock::boidVert[] = {0.0, 0.0, 0.0,
                                     -2.5, 0.0, 0.0,
                                     2.5, 0.0, 0.0,
@@ -76,7 +78,8 @@ CFlock::CFlock (void)
    m_first_member = NULL;
 
    // increment counter
-
+   ListOfFlocks[FlockCount] = this;
+  
    FlockCount++;
 
    return;
