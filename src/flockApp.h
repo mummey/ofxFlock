@@ -11,14 +11,12 @@
 // Forward declarations.
 class CBox;
 class CFlock;
-class CBoid;
 
 class flockApp : public ofBaseApp
 {
   private:
   CBox *box;
   CFlock *Flocks[MAX_FLOCKS];
-  CBoid  *Boids[MAX_BOIDS];
 
   ofxQuaternion wrld_rot;
   

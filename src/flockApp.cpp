@@ -6,7 +6,6 @@
 #include "ofxVec3f.h"
 
 #include "CBox.h"
-#include "CBoid.h"
 #include "CFlock.h"
 
 //--------------------------------------------------------------
