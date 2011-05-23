@@ -32,8 +32,7 @@
 //
 
 // visible friends list (work space reused by each flock boid)
-
-CBoid * CBoid::VisibleFriendsList[] = {NULL};
+std::vector<CBoid*> CBoid::VisibleFriendsList = std::vector<CBoid*>();
 
 //
 // constructor and destructor methods
@@ -594,11 +593,9 @@ void CBoid::AddToVisibleList (CBoid *ptr)
    if (m_num_flockmates_seen < MAX_FRIENDS_VISIBLE) {
 
       // nope--we can add to this one to the list
-
-      VisibleFriendsList[m_num_flockmates_seen] = ptr;
+      VisibleFriendsList.push_back(ptr);
 
       // increment counter
-
       m_num_flockmates_seen++;
 
    }
@@ -612,11 +609,8 @@ void CBoid::ClearVisibleList (void)
 {
 
    // walk down the list and clear each visible entry
-
-   for (int i = 0; i < MAX_FRIENDS_VISIBLE; i++) {
-      VisibleFriendsList[i] = NULL;
-   }
-
+   VisibleFriendsList . clear ();
+  
    // clear other visibility info
 
    m_num_flockmates_seen       = 0;

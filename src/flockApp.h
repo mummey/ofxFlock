@@ -21,17 +21,7 @@ class flockApp : public ofBaseApp
   ofxQuaternion wrld_rot;
   
   int mouseDownX, mouseDownY;
-  bool inMouseDrag;
-  public:
-  
-  CFlock *FlockAtIndex(int i)
-  {
-    if (i < 0 || i >= MAX_FLOCKS)
-      return NULL;
-  
-    return Flocks[i];
-  }
-  
+  bool inMouseDrag;  
   
 	public:
 		void setup();

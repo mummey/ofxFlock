@@ -12,6 +12,7 @@
 //
 // includes
 //
+#include <vector>
 
 #include "ofxVectorMath.h"
 #include "flockApp.h"
@@ -32,8 +33,7 @@ class CBoid {
       ///////////////////
 
       // visible friends list (work space reused by each boid)
-
-      static CBoid * VisibleFriendsList[MAX_FRIENDS_VISIBLE];
+      static std::vector<CBoid*> VisibleFriendsList;
 
       ///////////////////////////////
       // constructors and destructors
@@ -140,7 +140,6 @@ class CBoid {
       short    m_num_enemies_seen;           // # of enemies this member sees
 
       CBoid    *m_nearest_flockmate;         // pointer to nearest flockmate (if any)
-   
       CBoid    *m_nearest_enemy;             // pointer to nearest enemy (if any)
 
       float    m_dist_to_nearest_flockmate;  // distance to nearest flockmate
