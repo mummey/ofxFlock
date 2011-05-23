@@ -20,8 +20,6 @@
 // static variable initialization
 //
 
-int CFlock::FlockCount = 0;
-
 std::vector<CFlock*> CFlock::ListOfFlocks = std::vector<CFlock*>();
 
 const GLfloat CFlock::boidVert[] = {0.0, 0.0, 0.0,
@@ -63,7 +61,7 @@ CFlock::CFlock (int boidCount)
 
    // initialize internals
 
-   m_id           = FlockCount;
+   m_id           = ListOfFlocks . size ();
 
    m_num_members  = 0;
 
@@ -72,10 +70,8 @@ CFlock::CFlock (int boidCount)
    // increment counter
    ListOfFlocks . push_back(this);
   
-   FlockCount++;
-
-  for(int i=0; i<boidCount; i++)
-    AddTo(new CBoid(i));
+   for(int i=0; i<boidCount; i++)
+     AddTo(new CBoid(i));
   
    return;
 
@@ -87,14 +83,11 @@ CFlock::~CFlock (void)
 {
 
    // clear values
-
    m_id = m_num_members = 0;
-
    m_first_member = NULL;
 
    // decrement counter
-
-   FlockCount--;
+   ListOfFlocks . erase(ListOfFlocks . begin() + m_id);
 
    return;
 

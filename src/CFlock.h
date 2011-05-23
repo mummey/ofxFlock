@@ -35,10 +35,6 @@ class CFlock
       // static variables
       ///////////////////
 
-      // number of flocks
-
-      static int FlockCount;
-
       // list of flocks
 
       static std::vector<CFlock*> ListOfFlocks;

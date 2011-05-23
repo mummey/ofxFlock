@@ -396,7 +396,7 @@ int CBoid::SeeEnemies (int flock_id)
 
    // loop over each flock and determine the closest one we can see
 
-   for (int i = 0; i < CFlock::FlockCount; i++) {
+   for (int i = 0; i < CFlock::ListOfFlocks . size(); i++) {
 
       // test:  if this is OUR flock, skip it
 
