@@ -17,11 +17,6 @@
 
 #include "CBoid.h"
 
-#define MAX_FLOCKS 5
-#define DEFAULT_PERCEPTION_RANGE    100.0f
-#define KEEP_AWAY_DIST              60.0f
-#define SEPARATION_DIST             30.0f
-
 //
 // class definition
 //
@@ -53,7 +48,10 @@ class CFlock
       // Constructor.
       // Creates a new flock.
 
-      CFlock (int boidCount = 0);
+      CFlock (int boidCount = 0, 
+              float viewRange = 100.0f, 
+              float keepAwayDist = 60.0f, 
+              float separationDist = 30.0f);
 
       // Destructor.
 
@@ -104,6 +102,10 @@ class CFlock
       int     m_id;                    // id of this flock
       int     m_num_members;           // number of boids in this flock
       CBoid   *m_first_member;         // pointer to first member
+  
+      float   m_perceptionRange;
+      float   m_enemyDistance;
+      float   m_minDistance;
 
 };
 

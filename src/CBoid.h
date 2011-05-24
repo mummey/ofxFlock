@@ -17,8 +17,6 @@
 #include "ofxVectorMath.h"
 #include "flockApp.h"
 
-#define MAX_FRIENDS_VISIBLE MAX_BOIDS/2
-
 //
 // class definition
 //
@@ -43,7 +41,10 @@ class CBoid {
       // Creates an individual boid with randomized position, 
       // velocity, and orientation.
 
-      CBoid (int id_v);
+      CBoid (int id_v, 
+             float viewRange, 
+             float enemyDistance, 
+             float minDistance);
 
       // Constructor #2.
       // Creates an individual boid with specific position, 
@@ -52,7 +53,10 @@ class CBoid {
       CBoid (int id_v,
              ofxVec3f * pos_v, 
              ofxVec3f * vel_v, 
-             ofxVec3f * ang_v);
+             ofxVec3f * ang_v,
+             float viewRange, 
+             float enemyDistance, 
+             float minDistance);
 
       // Destructor
 
@@ -127,6 +131,8 @@ class CBoid {
       short    m_id;                         // member individual ID
 
       float    m_perception_range;           // how far member can see
+      float    m_enemy_distance;             // distance from enemy
+      float    m_min_distance;               // how far member can see
 
       ofxVec3f   m_pos;                       // position of member (in meters)
       ofxVec3f   m_vel;                       // velocity of member (meters/sec)

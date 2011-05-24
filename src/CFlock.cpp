@@ -55,23 +55,30 @@ const GLubyte CFlock::axesIndices[] = {0,1,0,2,0,3};
 
 // Constructor.
 // Creates a new flock.
-
-CFlock::CFlock (int boidCount)
+CFlock::CFlock (int boidCount,
+                float viewRange,
+                float keepAwayDist,
+                float separationDist)
 {
 
    // initialize internals
 
    m_id           = ListOfFlocks . size ();
-
    m_num_members  = 0;
-
    m_first_member = NULL;
 
+   m_perceptionRange = viewRange;
+   m_enemyDistance = keepAwayDist;
+   m_minDistance = separationDist;
+  
    // increment counter
    ListOfFlocks . push_back(this);
   
    for(int i=0; i<boidCount; i++)
-     AddTo(new CBoid(i));
+     AddTo(new CBoid(i, 
+                     m_perceptionRange, 
+                     m_enemyDistance,
+                     m_minDistance));
   
    return;
 
@@ -200,21 +207,21 @@ void CFlock::Draw ()
 
          //if (gDrawPerceptionDist) {
 //            glColor3f (1.0f, 1.0f, 1.0f);
-//            glutWireSphere (DEFAULT_PERCEPTION_RANGE, 12, 12);
+//            glutWireSphere (m_perceptionRange, 12, 12);
          //}
 
          // draw keepaway distance spheres?
 
          //if (gDrawKeepawayDist) {
 //            glColor3f (1.0f, 0.0f, 0.0f);
-//            glutWireSphere (KEEP_AWAY_DIST, 12, 12);
+//            glutWireSphere (m_enemyDistance, 12, 12);
          //}
 
          // draw separation distance spheres?
 
          //if (gDrawSeparationDist) {
 //            glColor3f (color_r, color_g, color_b);
-//            glutWireSphere (SEPARATION_DIST, 12, 12);
+//            glutWireSphere (m_minDistance, 12, 12);
         // }
 
          // draw local (boid space) XYZ axes?

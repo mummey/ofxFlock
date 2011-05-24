@@ -24,6 +24,8 @@
 #define MAX_CHANGE                    (MAX_SPEED * MAX_URGENCY)
 #define REACT_TO_ENEMIES              TRUE
 #define USE_TRUTH                     FALSE
+#define MAX_FRIENDS_VISIBLE           MAX_BOIDS/2
+
 
 #define GRAVITY   9.806650f  // meters/second
 
@@ -41,11 +43,16 @@ std::vector<CBoid*> CBoid::VisibleFriendsList = std::vector<CBoid*>();
 // Constructor #1.
 // Creates an individual boid with randomized position and velocity.
 
-CBoid::CBoid (int id_v)
+CBoid::CBoid (int id_v,
+              float viewRange, 
+              float enemyDistance, 
+              float minDistance)
 {
 
    m_id               = id_v;
-   m_perception_range = DEFAULT_PERCEPTION_RANGE;
+   m_perception_range = viewRange;
+   m_enemy_distance = enemyDistance;
+   m_min_distance = minDistance;
 
    // generate random position
 
@@ -95,11 +102,18 @@ CBoid::CBoid (int id_v)
 // Creates an individual boid with specific position and velocity.
 
 CBoid::CBoid (int id_v,
-              ofxVec3f * pos_v, ofxVec3f * vel_v, ofxVec3f * ang_v)
+              ofxVec3f * pos_v, 
+              ofxVec3f * vel_v, 
+              ofxVec3f * ang_v,
+              float viewRange, 
+              float enemyDistance, 
+              float minDistance)
 {
 
    m_id               = id_v;
-   m_perception_range = DEFAULT_PERCEPTION_RANGE;
+   m_perception_range = viewRange;
+   m_enemy_distance = enemyDistance;
+   m_min_distance = minDistance;
 
    m_pos = *pos_v;
    m_vel = *vel_v;
@@ -297,7 +311,7 @@ ofxVec3f CBoid::FleeEnemies (void)
 
    // test:  Are we too close to our nearest enemy?
 
-   if (m_dist_to_nearest_enemy < KEEP_AWAY_DIST) {
+   if (m_dist_to_nearest_enemy < m_enemy_distance) {
 
       // yep...compute vector away from enemy
 
@@ -318,7 +332,7 @@ ofxVec3f CBoid::FleeEnemies (void)
 ofxVec3f CBoid::KeepDistance (void)
 {
 
-   float ratio = m_dist_to_nearest_flockmate/SEPARATION_DIST;
+   float ratio = m_dist_to_nearest_flockmate / m_min_distance;
 
    // compute vector towards our nearest buddy
 
@@ -331,13 +345,13 @@ ofxVec3f CBoid::KeepDistance (void)
 
    // test:  are we too close to our nearest flockmate?
 
-   if (m_dist_to_nearest_flockmate < SEPARATION_DIST) {
+   if (m_dist_to_nearest_flockmate < m_min_distance) {
 
       // too close...move away from our neighbor
 
       change.scale (-ratio);
 
-   } else if (m_dist_to_nearest_flockmate > SEPARATION_DIST) {
+   } else if (m_dist_to_nearest_flockmate > m_min_distance) {
 
       // too far away...move towards our neighbor
 
