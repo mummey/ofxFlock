@@ -3,7 +3,7 @@
 
 // Includes
 #include "ofMain.h"
-#include "ofxQuaternion.h"
+#include "ofQuaternion.h"
 
 #define MAX_BOIDS                    30
 #define MAX_FLOCKS                    5
@@ -18,7 +18,7 @@ class flockApp : public ofBaseApp
   CBox *box;
   CFlock *Flocks[MAX_FLOCKS];
 
-  ofxQuaternion wrld_rot;
+  ofQuaternion wrld_rot;
   
   int mouseDownX, mouseDownY;
   bool inMouseDrag;

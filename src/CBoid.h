@@ -13,7 +13,7 @@
 // includes
 //
 
-#include "ofxVectorMath.h"
+#include "ofVectorMath.h"
 #include "flockApp.h"
 
 #define MAX_FRIENDS_VISIBLE MAX_BOIDS/2
@@ -50,9 +50,9 @@ class CBoid {
       // velocity, and orientation.
 
       CBoid (int id_v,
-             ofxVec3f * pos_v, 
-             ofxVec3f * vel_v, 
-             ofxVec3f * ang_v);
+             ofVec3f * pos_v,
+             ofVec3f * vel_v,
+             ofVec3f * ang_v);
 
       // Destructor
 
@@ -89,12 +89,12 @@ class CBoid {
       // GetOrient.
       // Returns the orientation of the boid in question.
 
-      ofxVec3f * GetOrient (void);
+      ofVec3f * GetOrient (void);
 
       // GetPos.
       // Returns the position of the boid in question.
 
-      ofxVec3f * GetPos (void);
+      ofVec3f * GetPos (void);
 
       // GetNext.
       // Returns the "next" pointer of the invoking member.
@@ -128,9 +128,9 @@ class CBoid {
 
       float    m_perception_range;           // how far member can see
 
-      ofxVec3f   m_pos;                       // position of member (in meters)
-      ofxVec3f   m_vel;                       // velocity of member (meters/sec)
-      ofxVec3f   m_ang;                       // orientation of member 
+      ofVec3f   m_pos;                       // position of member (in meters)
+      ofVec3f   m_vel;                       // velocity of member (meters/sec)
+      ofVec3f   m_ang;                       // orientation of member
                                              // (right-handed coordinate system)
       // computed
 
@@ -149,8 +149,8 @@ class CBoid {
       float    m_dist_to_nearest_enemy;      // distance to nearest enemy
                                              // (if any), in meters
 
-      ofxVec3f   m_oldpos;                     // last position
-      ofxVec3f   m_oldvel;                     // last velocity
+      ofVec3f   m_oldpos;                     // last position
+      ofVec3f   m_oldvel;                     // last velocity
 
       CBoid    *m_next;                      // pointer to next flockmate
       CBoid    *m_prev;                      // pointer to previous flockmate
@@ -164,25 +164,25 @@ class CBoid {
       // like to move, if it were all up to him and he was under
       // no other influences of any kind.
 
-      ofxVec3f Cruising (void);
+      ofVec3f Cruising (void);
 
       // FleeEnemies.
       // Generates a vector for a flock boid to avoid the 
       // nearest enemy (boid of a different flock) it sees.
 
-      ofxVec3f FleeEnemies (void);
+      ofVec3f FleeEnemies (void);
 
       // KeepDistance.
       // Generates a vector for a flock boid to maintain his
       // desired separation distance from the nearest flockmate he sees.
 
-      ofxVec3f KeepDistance (void);
+      ofVec3f KeepDistance (void);
 
       // MatchHeading.
       // Generates a vector for a flock boid to try
       // to match the heading of its nearest flockmate.
 
-      ofxVec3f MatchHeading (void);
+      ofVec3f MatchHeading (void);
 
       // SeeEnemies.
       // Determines which enemy flock boids a given flock boid can see.
@@ -198,7 +198,7 @@ class CBoid {
       // Generates a vector to guide a flock boid towards
       // the "center of mass" of the flockmates he can see.
 
-      ofxVec3f SteerToCenter (void);
+      ofVec3f SteerToCenter (void);
 
       // WorldBound.
       // Implements a world boundary so that flocks don't fly
@@ -217,8 +217,8 @@ class CBoid {
       // Adds vector values in changes into the accumumlator vector.
       // Returns magnitude of accumulator vector after adding changes.
 
-      float AccumulateChanges (ofxVec3f &accumulator, 
-                               ofxVec3f changes);
+      float AccumulateChanges (ofVec3f &accumulator,
+                               ofVec3f changes);
 
       // CanISee.
       // Determine whether a given invoking boid can see the boid in question.

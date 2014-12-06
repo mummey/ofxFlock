@@ -96,7 +96,7 @@ CBoid::CBoid (int id_v)
 // Creates an individual boid with specific position and velocity.
 
 CBoid::CBoid (int id_v,
-              ofxVec3f * pos_v, ofxVec3f * vel_v, ofxVec3f * ang_v)
+              ofVec3f * pos_v, ofVec3f * vel_v, ofVec3f * ang_v)
 {
 
    m_id               = id_v;
@@ -139,7 +139,7 @@ CBoid::~CBoid (void)
 void CBoid::FlockIt (int flock_id, CBoid *first_boid)
 {
 
-   ofxVec3f acc;
+   ofVec3f acc;
 
    // Step 1:  Update our position.
    // Update our position based on the velocity
@@ -254,9 +254,9 @@ void CBoid::FlockIt (int flock_id, CBoid *first_boid)
 // like to move, if it were all up to him and he was under
 // no other influences of any kind.
 
-ofxVec3f CBoid::Cruising (void)
+ofVec3f CBoid::Cruising (void)
 {
-   ofxVec3f  change = m_vel;
+   ofVec3f  change = m_vel;
 
    float  diff = (m_speed - DESIRED_SPEED)/ MAX_SPEED;
    float  urgency = (float) fabs(diff);
@@ -292,9 +292,9 @@ ofxVec3f CBoid::Cruising (void)
 // Generates a vector for a flock boid to avoid the 
 // nearest enemy (boid of a different flock) it sees.
 
-ofxVec3f CBoid::FleeEnemies (void)
+ofVec3f CBoid::FleeEnemies (void)
 {
-   ofxVec3f change;
+   ofVec3f change;
 
    // test:  Are we too close to our nearest enemy?
 
@@ -316,14 +316,14 @@ ofxVec3f CBoid::FleeEnemies (void)
 // Generates a vector for a flock boid to maintain his
 // desired separation distance from the nearest flockmate he sees.
 
-ofxVec3f CBoid::KeepDistance (void)
+ofVec3f CBoid::KeepDistance (void)
 {
 
    float ratio = m_dist_to_nearest_flockmate/SEPARATION_DIST;
 
    // compute vector towards our nearest buddy
 
-   ofxVec3f change = m_nearest_flockmate->m_pos - m_pos;   
+   ofVec3f change = m_nearest_flockmate->m_pos - m_pos;   
 
    // constrain computed ratio to our min/max Urgency levels
 
@@ -360,12 +360,12 @@ ofxVec3f CBoid::KeepDistance (void)
 // Generates a vector for a flock boid to try
 // to match the heading of its nearest flockmate.
 
-ofxVec3f CBoid::MatchHeading (void)
+ofVec3f CBoid::MatchHeading (void)
 {
 
    // copy the heading of our nearest buddy
 
-   ofxVec3f change = m_nearest_flockmate->m_vel;
+   ofVec3f change = m_nearest_flockmate->m_vel;
 
    // normalize and then scale our vector change a bit...after
    // all we can't instantly snap to a new heading, can we?
@@ -490,10 +490,10 @@ int CBoid::SeeFriends (CBoid *first_boid)
 // Generates a vector to guide a flock boid towards
 // the "center of mass" of the flockmates he can see.
 
-ofxVec3f CBoid::SteerToCenter (void)
+ofVec3f CBoid::SteerToCenter (void)
 {
 
-   ofxVec3f center, change;
+   ofVec3f center, change;
 
    // walk down the visibility list and sum up their position vectors
 
@@ -566,8 +566,8 @@ void CBoid::WorldBound (void)
 // Adds vector values in changes into the accumumlator vector.
 // Returns:  magnitude of accumulator vector after adding changes.
 
-float CBoid::AccumulateChanges (ofxVec3f &accumulator, 
-                                ofxVec3f changes)
+float CBoid::AccumulateChanges (ofVec3f &accumulator, 
+                                ofVec3f changes)
 {
 
    // apply the change
@@ -678,7 +678,7 @@ void CBoid::ComputeRPY (void)
 
    // Determine the direction of the lateral acceleration.
 
-   ofxVec3f lateralDir = (m_vel.crossed(m_vel - m_oldvel)).crossed(m_vel);
+   ofVec3f lateralDir = (m_vel.crossed(m_vel - m_oldvel)).crossed(m_vel);
 
    lateralDir.normalize();
 
@@ -747,7 +747,7 @@ void CBoid::SetPrev (CBoid *ptr)
 // GetOrient.
 // Returns the orientation of the boid in question.
 
-ofxVec3f * CBoid::GetOrient (void)
+ofVec3f * CBoid::GetOrient (void)
 {
 
    return (&m_ang);
@@ -757,7 +757,7 @@ ofxVec3f * CBoid::GetOrient (void)
 // GetPos.
 // Returns the position of the boid in question.
 
-ofxVec3f * CBoid::GetPos (void)
+ofVec3f * CBoid::GetPos (void)
 {
 
    return (&m_pos);

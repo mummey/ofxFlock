@@ -8,7 +8,7 @@
 #ifndef _CBOX_H
 #define _CBOX_H
 
-#include "ofxVectorMath.h"
+#include "ofVectorMath.h"
 
 class CBox  
 {

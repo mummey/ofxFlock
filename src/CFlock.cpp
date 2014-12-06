@@ -13,7 +13,7 @@
 #include "CFlock.h" 
 #include "ofConstants.h"
 #include "ofGraphics.h"
-#include "ofxVectorMath.h"
+#include "ofVectorMath.h"
 #include "ofAppGlutWindow.h"
 
 //
@@ -146,7 +146,7 @@ void CFlock::Draw ()
 
    CBoid *ptr;
 
-   ofxVec3f *pos, *orient;
+   ofVec3f *pos, *orient;
 
    float color_r, color_g, color_b;
 

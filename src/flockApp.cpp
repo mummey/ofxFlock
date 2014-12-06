@@ -3,7 +3,7 @@
 #include "ofGraphics.h"
 #include "ofConstants.h"
 
-#include "ofxVec3f.h"
+#include "ofVec3f.h"
 
 #include "CBox.h"
 #include "CFlock.h"
@@ -35,12 +35,12 @@ void flockApp::update()
   
   if(inMouseDrag)
     {
-      ofxVec3f screenVec(mouseX-mouseDownX,mouseY-mouseDownY,0.0);
+      ofVec3f screenVec(mouseX-mouseDownX,mouseY-mouseDownY,0.0);
       screenVec.limit(ofGetHeight()/2);
       float angle = (10.0 / 60.0) * screenVec.length() / (ofGetHeight()/2);
       screenVec.normalize();
       screenVec.set(screenVec.y,screenVec.x,0.0);
-      wrld_rot = wrld_rot * ofxQuaternion(ofDegToRad(angle), screenVec);
+      wrld_rot = wrld_rot * ofQuaternion(ofDegToRad(angle), screenVec);
     }
 }
 
@@ -48,7 +48,7 @@ void flockApp::update()
 void flockApp::draw()
 {
   float ang=0.0;
-  ofxVec3f axis;
+  ofVec3f axis;
   wrld_rot.getRotate(ang, axis);
   
   ofPushMatrix();
@@ -83,16 +83,16 @@ void flockApp::keyPressed(int key)
     exit();
     break;
     case OF_KEY_UP: 
-    wrld_rot = wrld_rot * ofxQuaternion(ofDegToRad(5.0), ofxVec3f(1.0, 0.0, 0.0));
+    wrld_rot = wrld_rot * ofQuaternion(ofDegToRad(5.0), ofVec3f(1.0, 0.0, 0.0));
     break;
     case OF_KEY_DOWN: 
-    wrld_rot = wrld_rot * ofxQuaternion(ofDegToRad(-5.0), ofxVec3f(1.0, 0.0, 0.0));
+    wrld_rot = wrld_rot * ofQuaternion(ofDegToRad(-5.0), ofVec3f(1.0, 0.0, 0.0));
     break;
     case OF_KEY_LEFT: 
-    wrld_rot = wrld_rot * ofxQuaternion(ofDegToRad(5.0), ofxVec3f(0.0, 1.0, 0.0));
+    wrld_rot = wrld_rot * ofQuaternion(ofDegToRad(5.0), ofVec3f(0.0, 1.0, 0.0));
     break;
     case OF_KEY_RIGHT: 
-    wrld_rot = wrld_rot * ofxQuaternion(ofDegToRad(-5.0), ofxVec3f(0.0, 1.0, 0.0));
+    wrld_rot = wrld_rot * ofQuaternion(ofDegToRad(-5.0), ofVec3f(0.0, 1.0, 0.0));
     break;
   }
 }
